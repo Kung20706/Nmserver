@@ -1,0 +1,926 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/Account/Assets/UploadImage": {
+            "post": {
+                "description": "解析時間來上傳圖片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "UserAssets"
+                ],
+                "summary": "Request.FormFile(\"file\") Header \"tableid\" \"time\"",
+                "parameters": [
+                    {
+                        "description": "修改的結構",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountCreateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功即可呼叫其他API",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.Accountres"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/Create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "parameters": [
+                    {
+                        "description": "輸入帳號密碼",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountCreateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/External/Login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "parameters": [
+                    {
+                        "description": "輸入帳號密碼",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.ExternalLoginInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/GetCharData": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "token get chatdata",
+                "parameters": [
+                    {
+                        "description": "修改會員資訊",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountStatusInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/GetUserData": {
+            "post": {
+                "description": "TOKEN =\u003e response(userdata)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "登入成功取使用者資訊",
+                "parameters": [
+                    {
+                        "description": "登入參數",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountStatusInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功即可呼叫其他API",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.Accountres"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/Internal/Login": {
+            "post": {
+                "description": "取id 將欄位內帳號資料刪除",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "登入帳號",
+                "parameters": [
+                    {
+                        "description": "登入參數",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountLoginInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功即可呼叫其他API",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.Accountres"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/List": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "回傳資訊列表",
+                "parameters": [
+                    {
+                        "description": "回傳資訊列表",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/Query": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "回傳資訊列表",
+                "parameters": [
+                    {
+                        "description": "回傳資訊列表",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/ResetPassWord": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "修改密碼",
+                "parameters": [
+                    {
+                        "description": "重製密碼",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountUpdatePasswordInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/Status": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "取金幣",
+                "parameters": [
+                    {
+                        "description": "範例TOKEN取金幣",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountStatusInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/UpdateCharData": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "修改會員資訊",
+                "parameters": [
+                    {
+                        "description": "修改會員資訊",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountUpdateChars"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/UpdateData": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "修改會員資訊",
+                "parameters": [
+                    {
+                        "description": "修改會員資訊",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountUpdateDataInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/Account/UpdateStatus": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "修改金錢取狀態",
+                "parameters": [
+                    {
+                        "description": "修改狀態",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.AccountUpdateStatusInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/Accountapi.TokenRes"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Accountapi.AccountCreateInput": {
+            "type": "object",
+            "properties": {
+                "alias": {
+                    "description": "別名",
+                    "type": "string",
+                    "example": "傑森"
+                },
+                "areacode": {
+                    "description": "AreaCode",
+                    "type": "string",
+                    "example": "405"
+                },
+                "auth": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "birthday": {
+                    "description": "生日",
+                    "type": "string",
+                    "example": "2018-08-14"
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string",
+                    "example": "0987@gmail.com"
+                },
+                "gender": {
+                    "description": "Gender",
+                    "type": "string",
+                    "example": "male"
+                },
+                "password": {
+                    "description": "密碼",
+                    "type": "string",
+                    "example": "qwe12345"
+                },
+                "phone": {
+                    "description": "Phone",
+                    "type": "string",
+                    "example": "2132190dsa"
+                },
+                "username": {
+                    "description": "使用者帳號",
+                    "type": "string",
+                    "example": "qwq111@gmail.com"
+                }
+            }
+        },
+        "Accountapi.AccountLoginInput": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "description": "密碼",
+                    "type": "string",
+                    "example": "qwe12345"
+                },
+                "username": {
+                    "description": "使用者名稱",
+                    "type": "string",
+                    "example": "qwq111"
+                }
+            }
+        },
+        "Accountapi.AccountStatusInput": {
+            "type": "object",
+            "properties": {
+                "Token": {
+                    "type": "string",
+                    "example": "WERTYUIDSDDQMQWLKDQW"
+                }
+            }
+        },
+        "Accountapi.AccountUpdateChars": {
+            "type": "object",
+            "properties": {
+                "Coins": {
+                    "type": "object",
+                    "properties": {
+                        "C1": {
+                            "type": "integer"
+                        },
+                        "C10": {
+                            "type": "integer"
+                        },
+                        "C11": {
+                            "type": "integer"
+                        },
+                        "C12": {
+                            "type": "integer"
+                        },
+                        "C2": {
+                            "type": "integer"
+                        },
+                        "C3": {
+                            "type": "integer"
+                        },
+                        "C4": {
+                            "type": "integer"
+                        },
+                        "C5": {
+                            "type": "integer"
+                        },
+                        "C6": {
+                            "type": "integer"
+                        },
+                        "C7": {
+                            "type": "integer"
+                        },
+                        "C8": {
+                            "type": "integer"
+                        },
+                        "C9": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "Graphic": {
+                    "type": "object",
+                    "properties": {
+                        "G0": {
+                            "type": "string"
+                        },
+                        "G1": {
+                            "type": "string"
+                        },
+                        "G2": {
+                            "type": "string"
+                        },
+                        "G3": {
+                            "type": "string"
+                        },
+                        "G4": {
+                            "type": "string"
+                        },
+                        "G5": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Others": {
+                    "type": "object",
+                    "properties": {
+                        "Z2r": {
+                            "type": "string"
+                        },
+                        "Z5c": {
+                            "type": "string"
+                        },
+                        "Z5s": {
+                            "type": "string"
+                        },
+                        "Z7n": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Scores": {
+                    "type": "object",
+                    "properties": {
+                        "P1": {
+                            "type": "integer"
+                        },
+                        "P10": {
+                            "type": "integer"
+                        },
+                        "P11": {
+                            "type": "integer"
+                        },
+                        "P12": {
+                            "type": "integer"
+                        },
+                        "P2": {
+                            "type": "integer"
+                        },
+                        "P3": {
+                            "type": "integer"
+                        },
+                        "P4": {
+                            "type": "integer"
+                        },
+                        "P5": {
+                            "type": "integer"
+                        },
+                        "P6": {
+                            "type": "integer"
+                        },
+                        "P7": {
+                            "type": "integer"
+                        },
+                        "P8": {
+                            "type": "integer"
+                        },
+                        "P9": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "Times": {
+                    "type": "object",
+                    "properties": {
+                        "T": {
+                            "type": "number"
+                        },
+                        "T0": {
+                            "type": "number"
+                        },
+                        "T1": {
+                            "type": "number"
+                        },
+                        "T10": {
+                            "type": "number"
+                        },
+                        "T10_0": {
+                            "type": "number"
+                        },
+                        "T10_1": {
+                            "type": "number"
+                        },
+                        "T10_2": {
+                            "type": "number"
+                        },
+                        "T11": {
+                            "type": "number"
+                        },
+                        "T110": {
+                            "type": "number"
+                        },
+                        "T12": {
+                            "type": "number"
+                        },
+                        "T12_0": {
+                            "type": "number"
+                        },
+                        "T12_1": {
+                            "type": "number"
+                        },
+                        "T12_2": {
+                            "type": "number"
+                        },
+                        "T12_3": {
+                            "type": "number"
+                        },
+                        "T12_4": {
+                            "type": "number"
+                        },
+                        "T2": {
+                            "type": "number"
+                        },
+                        "T2_d": {
+                            "type": "number"
+                        },
+                        "T2_i": {
+                            "type": "number"
+                        },
+                        "T2_m": {
+                            "type": "number"
+                        },
+                        "T2_w": {
+                            "type": "number"
+                        },
+                        "T2_y": {
+                            "type": "number"
+                        },
+                        "T3": {
+                            "type": "number"
+                        },
+                        "T3_0": {
+                            "type": "number"
+                        },
+                        "T3_1": {
+                            "type": "number"
+                        },
+                        "T3_2": {
+                            "type": "number"
+                        },
+                        "T3_3": {
+                            "type": "number"
+                        },
+                        "T3_4": {
+                            "type": "number"
+                        },
+                        "T3_5": {
+                            "type": "number"
+                        },
+                        "T4": {
+                            "type": "number"
+                        },
+                        "T4_0": {
+                            "type": "number"
+                        },
+                        "T4_1": {
+                            "type": "number"
+                        },
+                        "T4_2": {
+                            "type": "number"
+                        },
+                        "T4_3": {
+                            "type": "number"
+                        },
+                        "T5": {
+                            "type": "number"
+                        },
+                        "T5_0": {
+                            "type": "number"
+                        },
+                        "T5_1": {
+                            "type": "number"
+                        },
+                        "T5_2": {
+                            "type": "number"
+                        },
+                        "T6": {
+                            "type": "number"
+                        },
+                        "T7": {
+                            "type": "number"
+                        },
+                        "T8": {
+                            "type": "number"
+                        },
+                        "T8_0": {
+                            "type": "number"
+                        },
+                        "T8_1": {
+                            "type": "number"
+                        },
+                        "T8_2": {
+                            "type": "number"
+                        },
+                        "T8_3": {
+                            "type": "number"
+                        },
+                        "T8_4": {
+                            "type": "number"
+                        },
+                        "T9": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "Token": {
+                    "type": "string"
+                }
+            }
+        },
+        "Accountapi.AccountUpdateDataInput": {
+            "type": "object",
+            "properties": {
+                "Token": {
+                    "description": "Token",
+                    "type": "string",
+                    "example": "218f0b43e69c7390699cb0506e6b01c4eb6c842cbd38dca335702ae440dac576"
+                },
+                "alias": {
+                    "description": "使用者名稱",
+                    "type": "string",
+                    "example": "小河"
+                },
+                "auth": {
+                    "description": "Auth",
+                    "type": "string",
+                    "example": "1"
+                },
+                "birthday": {
+                    "description": "生日",
+                    "type": "string",
+                    "example": "2018-08-14"
+                },
+                "gender": {
+                    "description": "Gender",
+                    "type": "string",
+                    "example": "male"
+                },
+                "phone": {
+                    "description": "Phone",
+                    "type": "string",
+                    "example": "2132190dsa"
+                }
+            }
+        },
+        "Accountapi.AccountUpdatePasswordInput": {
+            "type": "object",
+            "properties": {
+                "NewPassword": {
+                    "description": "新密碼",
+                    "type": "string",
+                    "example": "qwer5678"
+                },
+                "Token": {
+                    "description": "用於驗證身分",
+                    "type": "string",
+                    "example": "qwer5678"
+                }
+            }
+        },
+        "Accountapi.AccountUpdateStatusInput": {
+            "type": "object",
+            "properties": {
+                "Token": {
+                    "type": "string",
+                    "example": "WERTYUIDSDDQMQWLKDQW"
+                },
+                "money": {
+                    "description": "當前金幣-money int",
+                    "type": "integer"
+                },
+                "unlock1": {
+                    "type": "boolean"
+                },
+                "unlock2": {
+                    "description": "道具(是否已購買)bool",
+                    "type": "boolean"
+                }
+            }
+        },
+        "Accountapi.Accountres": {
+            "type": "object",
+            "properties": {
+                "Alias": {
+                    "type": "string",
+                    "example": "大傑"
+                },
+                "CreatedAt": {
+                    "type": "string",
+                    "example": "2018-08-14 16:02:32"
+                },
+                "IsFreeze": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "LoginFailedCount": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "Status": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "UpdatedAt": {
+                    "type": "string",
+                    "example": "2018-08-20 16:02:32"
+                },
+                "UserID": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "UserName": {
+                    "type": "string",
+                    "example": "jay@gmail.com"
+                }
+            }
+        },
+        "Accountapi.ExternalLoginInput": {
+            "type": "object",
+            "properties": {
+                "FacebookID": {
+                    "description": "FID",
+                    "type": "string",
+                    "example": "sdfedx3-01"
+                },
+                "GoogleID": {
+                    "description": "GID",
+                    "type": "string",
+                    "example": "2132190dsa"
+                },
+                "LineID": {
+                    "description": "Line",
+                    "type": "string",
+                    "example": "sdfedx3-01"
+                }
+            }
+        },
+        "Accountapi.TokenRes": {
+            "type": "object",
+            "properties": {
+                "Token": {
+                    "type": "string",
+                    "example": "218f0b43e69c7390699cb0506e6b01c4eb6c842cbd38dca335702ae440dac576"
+                },
+                "user_id": {
+                    "type": "string",
+                    "example": "7390699cb05"
+                }
+            }
+        }
+    }
+}

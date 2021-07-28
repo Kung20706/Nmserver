@@ -1,0 +1,69 @@
+package bootstrap
+
+import (
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"github.com/naoina/toml"
+)
+
+// Conf 全域設定變數
+var Conf *Config
+
+// LoadConfig 載入 config
+func LoadConfig() *Config {
+	//macos
+	configFile := GetAppRoot() + "/config/" + GetAppEnv() + "/" + GetAppSite() + ".toml"
+	//windows
+	// configFile := GetAppRoot() + `\config\project\` + GetAppEnv() + `\` + GetAppSite() + ".toml"
+	log.Print(configFile)
+	log.Print("http://127.0.0.1:9487/swagger/index.html#/")
+	tomlData, readFileErr := ioutil.ReadFile(configFile)
+	if readFileErr != nil {
+		msg := fmt.Sprintf("❌ 讀取Config錯誤： %v ❌", readFileErr)
+		WriteLog("ERROR", msg)
+		os.Exit(1)
+	}
+
+	err := toml.Unmarshal(tomlData, &Conf)
+	if err != nil {
+		msg := fmt.Sprintf("❌ 載入Config錯誤： %v ❌", err)
+		WriteLog("ERROR", msg)
+		os.Exit(1)
+	}
+	return Conf
+}
+
+var sig chan os.Signal
+var serverClose chan os.Signal
+
+// SetupGracefulSignal 設定優雅關閉的信號
+func SetupGracefulSignal() {
+	sig = make(chan os.Signal, 1)
+	serverClose = make(chan os.Signal)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGTERM)
+	go func() {
+		s := <-sig
+		for {
+			select {
+			case serverClose <- s:
+			}
+		}
+	}()
+}
+
+// GracefulDown 優雅結束程式
+func GracefulDown() <-chan os.Signal {
+	return serverClose
+}
+
+// WaitOnceSignal 等待一次的訊號
+func WaitOnceSignal() (sig chan os.Signal) {
+	sig = make(chan os.Signal)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGKILL)
+	return
+}

@@ -1,0 +1,617 @@
+definitions:
+  Accountapi.AccountCreateInput:
+    properties:
+      alias:
+        description: 別名
+        example: 傑森
+        type: string
+      areacode:
+        description: AreaCode
+        example: "405"
+        type: string
+      auth:
+        example: "1"
+        type: string
+      birthday:
+        description: 生日
+        example: "2018-08-14"
+        type: string
+      email:
+        description: Email
+        example: 0987@gmail.com
+        type: string
+      gender:
+        description: Gender
+        example: male
+        type: string
+      password:
+        description: 密碼
+        example: qwe12345
+        type: string
+      phone:
+        description: Phone
+        example: 2132190dsa
+        type: string
+      username:
+        description: 使用者帳號
+        example: qwq111@gmail.com
+        type: string
+    type: object
+  Accountapi.AccountLoginInput:
+    properties:
+      password:
+        description: 密碼
+        example: qwe12345
+        type: string
+      username:
+        description: 使用者名稱
+        example: qwq111
+        type: string
+    type: object
+  Accountapi.AccountStatusInput:
+    properties:
+      Token:
+        example: WERTYUIDSDDQMQWLKDQW
+        type: string
+    type: object
+  Accountapi.AccountUpdateChars:
+    properties:
+      Coins:
+        properties:
+          C1:
+            type: integer
+          C2:
+            type: integer
+          C3:
+            type: integer
+          C4:
+            type: integer
+          C5:
+            type: integer
+          C6:
+            type: integer
+          C7:
+            type: integer
+          C8:
+            type: integer
+          C9:
+            type: integer
+          C10:
+            type: integer
+          C11:
+            type: integer
+          C12:
+            type: integer
+        type: object
+      Graphic:
+        properties:
+          G0:
+            type: string
+          G1:
+            type: string
+          G2:
+            type: string
+          G3:
+            type: string
+          G4:
+            type: string
+          G5:
+            type: string
+        type: object
+      Others:
+        properties:
+          Z2r:
+            type: string
+          Z5c:
+            type: string
+          Z5s:
+            type: string
+          Z7n:
+            type: string
+        type: object
+      Scores:
+        properties:
+          P1:
+            type: integer
+          P2:
+            type: integer
+          P3:
+            type: integer
+          P4:
+            type: integer
+          P5:
+            type: integer
+          P6:
+            type: integer
+          P7:
+            type: integer
+          P8:
+            type: integer
+          P9:
+            type: integer
+          P10:
+            type: integer
+          P11:
+            type: integer
+          P12:
+            type: integer
+        type: object
+      Times:
+        properties:
+          T:
+            type: number
+          T0:
+            type: number
+          T1:
+            type: number
+          T2:
+            type: number
+          T2_d:
+            type: number
+          T2_i:
+            type: number
+          T2_m:
+            type: number
+          T2_w:
+            type: number
+          T2_y:
+            type: number
+          T3:
+            type: number
+          T3_0:
+            type: number
+          T3_1:
+            type: number
+          T3_2:
+            type: number
+          T3_3:
+            type: number
+          T3_4:
+            type: number
+          T3_5:
+            type: number
+          T4:
+            type: number
+          T4_0:
+            type: number
+          T4_1:
+            type: number
+          T4_2:
+            type: number
+          T4_3:
+            type: number
+          T5:
+            type: number
+          T5_0:
+            type: number
+          T5_1:
+            type: number
+          T5_2:
+            type: number
+          T6:
+            type: number
+          T7:
+            type: number
+          T8:
+            type: number
+          T8_0:
+            type: number
+          T8_1:
+            type: number
+          T8_2:
+            type: number
+          T8_3:
+            type: number
+          T8_4:
+            type: number
+          T9:
+            type: number
+          T10:
+            type: number
+          T10_0:
+            type: number
+          T10_1:
+            type: number
+          T10_2:
+            type: number
+          T11:
+            type: number
+          T12:
+            type: number
+          T12_0:
+            type: number
+          T12_1:
+            type: number
+          T12_2:
+            type: number
+          T12_3:
+            type: number
+          T12_4:
+            type: number
+          T110:
+            type: number
+        type: object
+      Token:
+        type: string
+    type: object
+  Accountapi.AccountUpdateDataInput:
+    properties:
+      Token:
+        description: Token
+        example: 218f0b43e69c7390699cb0506e6b01c4eb6c842cbd38dca335702ae440dac576
+        type: string
+      alias:
+        description: 使用者名稱
+        example: 小河
+        type: string
+      auth:
+        description: Auth
+        example: "1"
+        type: string
+      birthday:
+        description: 生日
+        example: "2018-08-14"
+        type: string
+      gender:
+        description: Gender
+        example: male
+        type: string
+      phone:
+        description: Phone
+        example: 2132190dsa
+        type: string
+    type: object
+  Accountapi.AccountUpdatePasswordInput:
+    properties:
+      NewPassword:
+        description: 新密碼
+        example: qwer5678
+        type: string
+      Token:
+        description: 用於驗證身分
+        example: qwer5678
+        type: string
+    type: object
+  Accountapi.AccountUpdateStatusInput:
+    properties:
+      Token:
+        example: WERTYUIDSDDQMQWLKDQW
+        type: string
+      money:
+        description: 當前金幣-money int
+        type: integer
+      unlock1:
+        type: boolean
+      unlock2:
+        description: 道具(是否已購買)bool
+        type: boolean
+    type: object
+  Accountapi.Accountres:
+    properties:
+      Alias:
+        example: 大傑
+        type: string
+      CreatedAt:
+        example: "2018-08-14 16:02:32"
+        type: string
+      IsFreeze:
+        example: false
+        type: boolean
+      LoginFailedCount:
+        example: 1
+        type: integer
+      Status:
+        example: 1
+        type: integer
+      UpdatedAt:
+        example: "2018-08-20 16:02:32"
+        type: string
+      UserID:
+        example: 1
+        type: integer
+      UserName:
+        example: jay@gmail.com
+        type: string
+    type: object
+  Accountapi.ExternalLoginInput:
+    properties:
+      FacebookID:
+        description: FID
+        example: sdfedx3-01
+        type: string
+      GoogleID:
+        description: GID
+        example: 2132190dsa
+        type: string
+      LineID:
+        description: Line
+        example: sdfedx3-01
+        type: string
+    type: object
+  Accountapi.TokenRes:
+    properties:
+      Token:
+        example: 218f0b43e69c7390699cb0506e6b01c4eb6c842cbd38dca335702ae440dac576
+        type: string
+      user_id:
+        example: 7390699cb05
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /Account/Assets/UploadImage:
+    post:
+      consumes:
+      - application/json
+      description: 解析時間來上傳圖片
+      parameters:
+      - description: 修改的結構
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功即可呼叫其他API
+          schema:
+            $ref: '#/definitions/Accountapi.Accountres'
+      summary: Request.FormFile("file") Header "tableid" "time"
+      tags:
+      - UserAssets
+  /Account/Create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 輸入帳號密碼
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      tags:
+      - Auth
+  /Account/External/Login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 輸入帳號密碼
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.ExternalLoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      tags:
+      - Auth
+  /Account/GetCharData:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 修改會員資訊
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountStatusInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: token get chatdata
+      tags:
+      - Auth
+  /Account/GetUserData:
+    post:
+      consumes:
+      - application/json
+      description: TOKEN => response(userdata)
+      parameters:
+      - description: 登入參數
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountStatusInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功即可呼叫其他API
+          schema:
+            $ref: '#/definitions/Accountapi.Accountres'
+      summary: 登入成功取使用者資訊
+      tags:
+      - auth
+  /Account/Internal/Login:
+    post:
+      consumes:
+      - application/json
+      description: 取id 將欄位內帳號資料刪除
+      parameters:
+      - description: 登入參數
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountLoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功即可呼叫其他API
+          schema:
+            $ref: '#/definitions/Accountapi.Accountres'
+      summary: 登入帳號
+      tags:
+      - auth
+  /Account/List:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 回傳資訊列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.TokenRes'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 回傳資訊列表
+      tags:
+      - Auth
+  /Account/Query:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 回傳資訊列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.TokenRes'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 回傳資訊列表
+      tags:
+      - Auth
+  /Account/ResetPassWord:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 重製密碼
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountUpdatePasswordInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 修改密碼
+      tags:
+      - Auth
+  /Account/Status:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 範例TOKEN取金幣
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountStatusInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 取金幣
+      tags:
+      - Auth
+  /Account/UpdateCharData:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 修改會員資訊
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountUpdateChars'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 修改會員資訊
+      tags:
+      - Auth
+  /Account/UpdateData:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 修改會員資訊
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountUpdateDataInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 修改會員資訊
+      tags:
+      - Auth
+  /Account/UpdateStatus:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 修改狀態
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountUpdateStatusInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            $ref: '#/definitions/Accountapi.TokenRes'
+      summary: 修改金錢取狀態
+      tags:
+      - Auth
+swagger: "2.0"

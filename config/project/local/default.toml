@@ -1,0 +1,29 @@
+[app]
+env = "Bearlab"
+ip = "0.0.0.0"
+host = ""
+port = ":8082"
+secure = false
+debug = true
+auto_port = true
+site = "BearApp"
+
+[database_master]
+db = "Bearlab"
+host = "127.0.0.1"
+port = "3306"
+username = "root"
+password = "qwe123"
+
+[database_slave]
+db = "Bearlab"
+host = "127.0.0.1"
+port = "3306"
+username = "root"
+password = "qwe123"
+
+
+[cache_master]
+    host = "redis"
+    port = ":6379"
+    password = ""

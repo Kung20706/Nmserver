@@ -1,0 +1,64 @@
+version: '3'
+services: 
+
+  app:
+    build: .
+    image: app
+    ports:
+        - "9487:9487"
+    environment:
+      - GIN_MODE=debug
+      - PROJECT_ENV=${PROJECT_ENV}
+      - PROJECT_SITE=${PROJECT_SITE}
+      - PORT=${PORT}
+    restart: always
+
+  db:
+    image: mysql:5.6
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_USER: Bear
+        MYSQL_ROOT_PASSWORD: qwe123
+        MYSQL_DATABASE: BearLab
+    volumes:
+        - data:/var/lib/mysql
+    depends_on:
+        - adminer
+
+  adminer:
+    image: adminer
+    ports:
+        - "8099:8080"
+
+  redis:
+    image: redis
+    command: redis-server 
+      # ^
+      # 上述
+    ports:
+      - "6379:6379"  #將port導出 左為外面 又為裡面
+    volumes:
+    - ./data:/data
+    restart: always
+    
+  redis-admin:
+    image: rediscommander/redis-commander
+    ports:
+        - "3200:8081"
+    environment:
+        - REDIS_HOSTS=in-redis:redis:6379:0
+        - HTTP_USER=root
+        # - HTTP_PASSWORD=wdxr12345
+    depends_on:
+        - redis
+  
+volumes:
+  data:
+      driver: local
+  storage_app:
+      driver: local
+  storage_logs:
+      driver: local
+
+     

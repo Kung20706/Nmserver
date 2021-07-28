@@ -1,0 +1,20 @@
+[database_master]
+db = "Bearlab"
+host = "db"
+port = "3306"
+username = "bearlab"
+password = "qwe123"
+
+
+[cache_master]
+    host = "redis"
+    port = ":6379"
+    password = "wdxr12345"
+    
+[server]
+    [server.aws]
+        ip = "aws.com"
+        port = ":80"
+        host = "aws.com"
+        secure = false
+        api_key = ""

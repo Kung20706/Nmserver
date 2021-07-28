@@ -1,0 +1,30 @@
+2021/06/22 01:54:33 [2021-06-22 01:54:33]【INFO】⚙  PROJECT_ROOT: C:\Go\src\BearApp
+2021/06/22 01:54:33 [2021-06-22 01:54:33]【INFO】⚙  PROJECT_ENV: default
+2021/06/22 01:54:33 [2021-06-22 01:54:33]【INFO】⚙  PROJECT_SITE: default
+
+	📖 環境說明 📖
+
+	需傳入以下環境變數：
+
+	⚙  PROJECT_ENV : 專案環境
+		✏ docker 容器開發
+		✏ local 本機開發
+		✏ prod 正式
+
+	--------------
+
+	📖 指令說明 📖
+
+	⚙  主要指令
+		✏ server   運行伺服器
+		✏ schedule 運行背景排程
+		✏ run [command name] 執行指定命令
+
+	⚙  可執行的指令 (command name)
+		✏ demo 範例指令
+
+
+	📌  舉例： PROJECT_ENV=local ./app server
+	📌  舉例： PROJECT_ENV=local ./app schedule
+	📌  舉例： PROJECT_ENV=local ./app run demo
+
