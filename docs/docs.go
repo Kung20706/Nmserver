@@ -256,6 +256,38 @@ var doc = `{
                 }
             }
         },
+        "/Account/MailReset/{username}": {
+            "get": {
+                "description": "會利用userid進行開通",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AuthPlugin"
+                ],
+                "summary": "利用信箱註冊",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "username",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "😅開通成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/Account/Query": {
             "post": {
                 "consumes": [
@@ -935,10 +967,6 @@ var doc = `{
                 "Token": {
                     "type": "string",
                     "example": "218f0b43e69c7390699cb0506e6b01c4eb6c842cbd38dca335702ae440dac576"
-                },
-                "user_id": {
-                    "type": "string",
-                    "example": "7390699cb05"
                 }
             }
         }

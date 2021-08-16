@@ -1081,3 +1081,62 @@ func GetUserData(c *gin.Context) {
 	})
 
 }
+
+// AccountMailReSend 使用帳號寄出開通信件
+// @Summary 利用信箱註冊
+// @Description 會利用userid進行開通
+// @Tags AuthPlugin
+// @Accept json
+// @Produce json
+// @Param username path string true "username"
+// @Success 200 {string} string "😅開通成功"
+// @Router /Account/MailReset/{username}  [get]
+func AccountMailReset(c *gin.Context) {
+	username := c.Param("username")
+	account := username[1:len(username)]
+	// 判斷輸入參數
+	// AccountInput.
+	//連線資料庫
+	db, err := model.NewModelDB(model.Account{}, true)
+	if err != nil {
+		apiErr := errorcode.CheckGormConnError("get_db_conn", err)
+		dataAPI := datastruct.ErrAPI{
+			ErrorText: apiErr.ErrorText(),
+		}
+		c.JSON(http.StatusOK, dataAPI)
+		log.Println(dataAPI)
+		return
+	}
+	// 帳號開通時 此為信封觸發開通的url 可以把open cloum 打開 檢測這個參數使前端正常登入
+	result := model.Account{}
+	err = db.Where(
+		"username = ?", account,
+	).Find(&result).Error
+	if err != nil {
+		apiErr := errorcode.CheckGormConnError("account_not_found", err)
+		dataAPI := datastruct.ErrAPI{
+			ErrorText: apiErr.ErrorText(),
+		}
+		c.JSON(http.StatusOK, dataAPI)
+		log.Println(dataAPI)
+		return
+	}
+	log.Println(result.Username)
+	check := mail(result.Username)
+	if check == true {
+		apiErr := errorcode.CheckGormConnError("send_mail_success", err)
+		c.JSON(http.StatusOK, datastruct.API{
+			ErrorCode: apiErr.ErrorCode(),
+			ErrorText: apiErr.ErrorText(),
+			Data:      result.Username,
+		})
+	} else {
+		apiErr := errorcode.CheckGormConnError("v", err)
+		c.JSON(http.StatusOK, datastruct.API{
+			ErrorCode: apiErr.ErrorCode(),
+			ErrorText: "失敗了哭哭",
+			Data:      result.Username,
+		})
+	}
+	return
+}

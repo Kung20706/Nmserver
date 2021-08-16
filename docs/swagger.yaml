@@ -333,9 +333,6 @@ definitions:
       Token:
         example: 218f0b43e69c7390699cb0506e6b01c4eb6c842cbd38dca335702ae440dac576
         type: string
-      user_id:
-        example: 7390699cb05
-        type: string
     type: object
 info:
   contact: {}
@@ -488,6 +485,27 @@ paths:
       summary: 回傳資訊列表
       tags:
       - Auth
+  /Account/MailReset/{username}:
+    get:
+      consumes:
+      - application/json
+      description: 會利用userid進行開通
+      parameters:
+      - description: username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: "\U0001F605開通成功"
+          schema:
+            type: string
+      summary: 利用信箱註冊
+      tags:
+      - AuthPlugin
   /Account/Query:
     post:
       consumes:

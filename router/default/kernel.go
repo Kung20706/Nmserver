@@ -48,6 +48,7 @@ func LoadRoutes(r *gin.Engine) {
 	store, _ := redis.NewStore(10, "tcp", "redis:6379", "wdxr12345", []byte("secret"))
 	r.Use(sessions.Sessions("Authorization", store))
 	//改密碼確認信
+	r.GET("/Account/MailReset/*username", Accountapi.AccountMailReset)
 	r.POST("/Account/UpdateData", Accountapi.AccountUpdateData)
 	r.POST("/Account/ResetPassWord", Accountapi.AccountUpdatePassword)
 	r.POST("/Account/External/Login", Accountapi.AccountExternalLogin)
