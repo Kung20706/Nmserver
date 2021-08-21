@@ -87,9 +87,9 @@ type Accountres struct {
 type AccountUpdatePasswordInput struct {
 
 	// 新密碼
-	NewPassword string `json:"NewPassword" example:"qwer5678"`
+	NewPassword string `json:"username" example:"qwer5678"`
 	//用於驗證身分
-	Token string `json:"Token" example:"qwer5678"`
+	Mail string `json:"mail" example:"qwer5678@gmail.com"`
 }
 
 //AccountUpdatePasswordReturnAPI 修改密碼
@@ -573,3 +573,4 @@ type OperationUser struct {
 
 	Opes []model.Operation
 }
+

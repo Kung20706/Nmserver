@@ -61,7 +61,7 @@ func LoadRoutes(r *gin.Engine) {
 	r.POST("/Account/GetCharData", Accountapi.AccountGetCharData)
 	r.POST("/Account/GetUserData", Accountapi.GetUserData)
 	r.POST("/Account/Query", Accountapi.AccountQuery)
-
+	r.POST("/Account/PasswordRewrite", Accountapi.AccountPasswordRewrite)
 	r.Run(":9487")
 }
 func middleware1(c *gin.Context) {

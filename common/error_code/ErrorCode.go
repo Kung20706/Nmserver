@@ -47,7 +47,7 @@ var mappingAPIError = map[string]APIError{
 	"verification_success":   {"000200", "令牌驗證成功"},
 	"newpassword":            {"000200", "請設置新的密碼"},
 	"open_successed":         {"000200", "帳號已開通"},
-	"send_mail_success":      {"000200", "信箱發送成功"},
+	"send_mail_success":      {"200", "信箱發送成功"},
 	"user_fmt_err":           {"000201", "帳號格式不符"},
 	"password_fmt_err":       {"000202", "密碼格式不符"},
 	"newpassword_fmt_err":    {"000203", "新密碼格式不符"},

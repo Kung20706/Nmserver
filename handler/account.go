@@ -392,10 +392,10 @@ func AccountUpdatePassword(c *gin.Context) {
 		log.Println(dataAPI)
 		return
 	}
-
+	log.Print("this on",input)
 	// password := helper.CryptPassword(input.Password)
 	newpassword := helper.CryptPassword(input.NewPassword)
-
+    
 	db, err := model.NewModelDB(model.Account{}, true)
 	if err != nil {
 		apiErr := errorcode.CheckGormConnError("get_db_conn", err)
@@ -407,21 +407,9 @@ func AccountUpdatePassword(c *gin.Context) {
 		return
 	}
 
-	// AccountInput.
-	if len(input.Token) < 0 {
-		log.Println("尚未加入token")
-		return
-	}
-	authData, err := auth.DecryptSession(input.Token)
-	if err != nil {
-		log.Println("無效的內容 返回", authData)
-		return
-	}
-	//使session 換取登入操作權限
-	log.Println("Token", authData)
 	result := model.Account{}
 	err = db.Where(
-		"id = ?", authData.UserID,
+		"username = ?", input.Mail,
 	).Find(&result).Error
 
 	if err != nil {
@@ -434,16 +422,6 @@ func AccountUpdatePassword(c *gin.Context) {
 
 	}
 
-	if result.IsFreeze {
-		//帳號已凍結
-		apiErr := errorcode.CheckGormConnError("account_freeze", err)
-		dataAPI := datastruct.ErrAPI{
-			ErrorText: apiErr.ErrorText(),
-		}
-		c.JSON(http.StatusOK, dataAPI)
-		log.Println(dataAPI)
-		return
-	}
 
 	err = db.Model(&result).Update("password", newpassword).Error
 	if err != nil {
@@ -1134,9 +1112,119 @@ func AccountMailReset(c *gin.Context) {
 		apiErr := errorcode.CheckGormConnError("v", err)
 		c.JSON(http.StatusOK, datastruct.API{
 			ErrorCode: apiErr.ErrorCode(),
-			ErrorText: "失敗了哭哭",
+			ErrorText: "失敗",
 			Data:      result.Username,
 		})
 	}
 	return
+}
+
+
+
+
+// AccountPasswordRewrite 驗證token 改使用者密碼
+// @Summary 驗證token 改使用者密碼
+// @Description 取id 將欄位內帳號資料修改
+// @Tags UserData
+// @Accept json
+// @Produce json
+// @Param body body AccountPasswordInput true "登入參數"
+// @Success 200 {object} Accountres "成功即可呼叫其他API"
+// @Router /Account/PasswordRewrite [post]
+func AccountPasswordRewrite(c *gin.Context) {
+
+	//解析輸入資料
+
+	var input AccountPasswordInput
+
+	err := json.NewDecoder(c.Request.Body).Decode(&input)
+	if err != nil {
+		apiErr := errorcode.CheckGormConnError("parse_error", err)
+		dataAPI := datastruct.API{
+			ErrorText: apiErr.ErrorText(),
+			Data:      input,
+		}
+		c.JSON(http.StatusOK, dataAPI)
+		log.Println(dataAPI)
+	}
+log.Print(input)
+	// 資料庫連線
+	db, err := model.NewModelDB(model.Account{}, true)
+	if err != nil {
+		apiErr := errorcode.CheckGormConnError("get_db_conn", err)
+		dataAPI := datastruct.API{
+			ErrorText: apiErr.ErrorText(),
+			Data:      err,
+		}
+		c.JSON(http.StatusOK, dataAPI)
+		log.Println(dataAPI)
+		return
+	}
+	result := model.Account{}
+
+	authData, time, err := repository.GetUserBySession(input.Token)
+	if err != nil {
+		apiErr := errorcode.CheckGormConnError("token_verification_error", err)
+		dataAPI := datastruct.API{
+			ErrorText: apiErr.ErrorText(),
+		}
+		log.Print(time)
+		c.JSON(http.StatusOK, dataAPI)
+		log.Println(dataAPI)
+	}
+
+	//查詢相同名稱
+
+	if authData != 0 {
+		err = db.Where(
+			"id = ?", authData,
+		).Find(&result).Error
+		//找出使用者
+		if err != nil {
+			apiErr := errorcode.CheckGormConnError("account_not_found", err)
+			dataAPI := datastruct.ErrAPI{
+				ErrorText: apiErr.ErrorText(),
+			}
+			c.JSON(http.StatusOK, dataAPI)
+			log.Println(dataAPI)
+			return
+		}
+		cryptpassword := helper.CryptPassword(input.Password)
+
+		err = db.Model(&result).Update(model.Account{
+			Password:      cryptpassword,
+			ResetPassword: 0,
+		}).Error
+		log.Print("www", err)
+		if err != nil {
+			apiErr := errorcode.CheckGormConnError("parse_error", err)
+			dataAPI := datastruct.ErrAPI{
+				ErrorText: apiErr.ErrorText(),
+			}
+			c.JSON(http.StatusOK, dataAPI)
+			log.Println(dataAPI)
+		}
+
+		err = db.Model(&result).Update("reset_password", 0).Error
+		if err != nil {
+			apiErr := errorcode.CheckGormConnError("parse_error", err)
+			dataAPI := datastruct.ErrAPI{
+				ErrorText: apiErr.ErrorText(),
+			}
+			c.JSON(http.StatusOK, dataAPI)
+			log.Println(dataAPI)
+		}
+
+		apiErr := errorcode.CheckGormConnError("verification_success", err)
+		dataAPI := datastruct.API{
+			ErrorCode: apiErr.ErrorCode(),
+			ErrorText: apiErr.ErrorText(),
+			Data:      "",
+		}
+		c.JSON(http.StatusOK, dataAPI)
+
+	}
+
+	//密碼若是一樣 檢查成功 取得session
+
 }

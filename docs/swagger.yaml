@@ -48,6 +48,21 @@ definitions:
         example: qwq111
         type: string
     type: object
+  Accountapi.AccountPasswordInput:
+    properties:
+      Password:
+        description: 使用者名稱
+        example: qwe123
+        type: string
+      Token:
+        description: 持久性密鑰
+        example: qwer5678
+        type: string
+      userid:
+        description: 使用者唯一碼
+        example: qwer5678
+        type: string
+    type: object
   Accountapi.AccountStatusInput:
     properties:
       Token:
@@ -506,6 +521,28 @@ paths:
       summary: 利用信箱註冊
       tags:
       - AuthPlugin
+  /Account/PasswordRewrite:
+    post:
+      consumes:
+      - application/json
+      description: 取id 將欄位內帳號資料修改
+      parameters:
+      - description: 登入參數
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Accountapi.AccountPasswordInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功即可呼叫其他API
+          schema:
+            $ref: '#/definitions/Accountapi.Accountres'
+      summary: 驗證token 改使用者密碼
+      tags:
+      - UserData
   /Account/Query:
     post:
       consumes:

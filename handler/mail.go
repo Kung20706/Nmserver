@@ -62,7 +62,7 @@ func mail(token string) bool {
 		
 		.btn {
 		  text-align: center;
-		  background-color: #9dc1e1;
+		  background-color: #e1bf9d;
 		  color: white;
 		  border-radius: 8px;
 		  font-size: 24px;
@@ -73,7 +73,7 @@ func mail(token string) bool {
 		
 		.footer {
 		  margin: 128px 32px;
-		  background-color: #9dc1e1;
+		  background-color: #e1bf9d;
 		  padding: 128px 32px;
 		}
 		
@@ -126,7 +126,7 @@ func mail(token string) bool {
 				  </tr>
 			  <tr class="body">
 				<td align="center">
-				  <a class="btn" href="http://192.168.0.100:8081/resetpassword2" title="Verify your email">驗證</a>
+				  <a class="btn" href=`+"http://localhost:8080/resetpassword2/"+token+` title="Verify your email">驗證</a>
 				</td>
 			  </tr>
 				 <tr class="body">
@@ -150,7 +150,7 @@ func mail(token string) bool {
 	</body>
 	
 	</html>`
-	form := strings.Replace(text, "wEgyaPhGhbRfscwPWjpMHqpeHLHD7cK9", "fuckoff", -1)
+	form := strings.Replace(text, token, token, -1)
 	msg.AddAlternative("text/html", form)
 
 	m := gomail.NewMailer("smtp.gmail.com", "kung20706", "kung22980991", 587)
